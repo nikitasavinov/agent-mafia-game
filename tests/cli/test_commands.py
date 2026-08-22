@@ -151,6 +151,7 @@ def test_failed_play_preflight_points_to_doctor(tmp_path: Path) -> None:
     result = CliRunner().invoke(app, ["play", str(config)])
 
     assert result.exit_code == 1
-    assert "For detailed diagnostics" in result.output
-    assert "mafia doctor" in result.output
-    assert "missing-key.toml --live" in result.output
+    output = " ".join(result.output.split())
+    assert "For detailed diagnostics" in output
+    assert "mafia doctor" in output
+    assert "missing-key.toml --live" in output

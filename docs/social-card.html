@@ -1,0 +1,100 @@
+<!-- Source for docs/assets/social-preview.png (GitHub repo social preview, 1280x640).
+     Re-render with:
+       chrome="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+       "$chrome" --headless --disable-gpu --hide-scrollbars \
+         --force-device-scale-factor=2 --window-size=1280,640 \
+         --screenshot=/tmp/social@2x.png file://$PWD/docs/social-card.html
+       magick /tmp/social@2x.png -resize 1280x640 -strip docs/assets/social-preview.png
+     Rendered at 2x then downscaled for crisp text. Content stays inside GitHub's
+     recommended 40pt safe border. Palette and Menlo match docs/demo.tape. -->
+<meta charset="utf-8">
+<style>
+  :root{
+    --bg:#15161f; --panel:#1a1b26; --line:#3b4261; --dim:#565f89;
+    --fg:#c0caf5; --mag:#bb9af7; --cyan:#7dcfff; --blue:#7aa2f7;
+    --green:#9ece6a; --yellow:#e0af68; --red:#f7768e; --orange:#ff9e64;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:640px}
+  body{
+    background:
+      radial-gradient(1100px 620px at 22% 8%, #22243450 0%, transparent 62%),
+      radial-gradient(760px 520px at 92% 100%, #2a1f3340 0%, transparent 60%),
+      var(--bg);
+    font-family:Menlo,monospace; color:var(--fg);
+    display:flex; align-items:center; justify-content:center;
+  }
+  /* panel sits inside the 40pt safe border */
+  .panel{
+    position:relative; width:1176px; height:536px; border-radius:14px;
+    border:2px solid var(--line); background:linear-gradient(180deg,#1a1b2688,#15161f88);
+    padding:54px 60px 46px;
+    display:flex; flex-direction:column;
+  }
+  /* notched title, exactly like the game's boxed panels */
+  .notch{
+    position:absolute; top:-13px; left:56px; padding:0 16px; background:var(--bg);
+    font-size:18px; font-weight:700; letter-spacing:.14em; color:var(--mag);
+  }
+  .notch .sep{color:var(--dim); margin:0 10px}
+  .notch .n2{color:var(--cyan)}
+
+  .prompt{font-size:20px; color:var(--dim); letter-spacing:.02em}
+  .prompt b{color:var(--green); font-weight:700}
+  .prompt i{color:var(--fg); font-style:normal}
+
+  h1{
+    margin-top:18px; font-size:100px; white-space:nowrap; line-height:1; font-weight:700;
+    letter-spacing:-.045em; color:#e7ecff;
+  }
+  h1 .m{color:var(--red)}
+
+  .tag{
+    margin-top:24px; font-size:27px; line-height:1.5; white-space:nowrap; color:#a9b4dd;
+    letter-spacing:-.005em; max-width:1010px;
+  }
+  .tag b{color:var(--fg); font-weight:700}
+
+  .spacer{flex:1}
+
+  .roster{font-size:19px; letter-spacing:.01em; white-space:nowrap}
+  .roster .dot{color:#39406b; margin:0 10px}
+  .p1{color:var(--orange)} .p2{color:var(--mag)} .p3{color:var(--blue)}
+  .p4{color:#9d7cd8} .p5{color:var(--cyan)} .p6{color:var(--yellow)}
+  .dead{color:#4b5480; text-decoration:line-through; text-decoration-color:var(--red);
+        text-decoration-thickness:2px}
+
+  .meta{
+    margin-top:24px; padding-top:22px; border-top:2px solid #262a41;
+    display:flex; align-items:center; gap:14px; font-size:19px; white-space:nowrap; color:var(--dim);
+  }
+  .meta .s{color:#2f3452}
+  .meta .k{color:#8b95c0}
+</style>
+
+<div class="panel">
+  <div class="notch">NIGHT 2<span class="sep">·</span><span class="n2">MAFIA PRIVATE</span></div>
+
+  <div class="prompt"><b>❯</b> uv run <i>mafia play</i></div>
+
+  <h1>Agent <span class="m">Mafia</span></h1>
+
+  <div class="tag">
+    Six AI agents sit down at a table. <b>Some are lying.</b><br>
+    Watch them bluff, accuse, and vote each other out.
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="roster">
+    <span class="p1">#1 Ivy Stone</span><span class="dot">•</span><span class="p2">#2 Penny Sparks</span><span class="dot">•</span><span class="p3">#3 Deep Dash</span><span class="dot">•</span><span class="dead">#4 Quill Flash</span><span class="dot">•</span><span class="p5">#5 Nex Minute</span>
+  </div>
+
+  <div class="meta">
+    <span class="k">Python 3.11+</span><span class="s">│</span>
+    <span>any OpenAI-compatible API</span><span class="s">│</span>
+    <span class="k">OpenRouter · Ollama</span><span class="s">│</span>
+    <span>replayable</span><span class="s">│</span>
+    <span class="k">MIT</span>
+  </div>
+</div>
