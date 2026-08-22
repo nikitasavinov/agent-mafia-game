@@ -1,0 +1,56 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_base_url = "https://openrouter.ai/api/v1"
+# Export OPENROUTER_API_KEY before playing.
+default_api_key_env = "OPENROUTER_API_KEY"
+max_concurrency = 4
+
+[[players]]
+name = "Vera Verdict"
+provider = "openai_compatible"
+model = "ibm-granite/granite-4.1-8b"
+communication_style = "Play a retired television judge who treats every speech as sworn testimony. Demand evidence, overrule rambling, expose contradictions, and deliver each vote like a final verdict."
+
+[[players]]
+name = "Milo Static"
+provider = "openai_compatible"
+model = "google/gemini-2.5-flash-lite"
+communication_style = "Play a sleepless late-night radio host taking calls from a suspicious universe. Connect strange details with theatrical excitement, invite rival theories, and admit when a conspiracy loses signal."
+
+[[players]]
+name = "Cass Ledger"
+provider = "openai_compatible"
+model = "openai/gpt-4.1-nano"
+communication_style = "Play a forensic accountant maintaining a merciless suspicion ledger. Balance claims against votes, flag unexplained changes, and close every speech by naming who is currently in the red."
+
+[[players]]
+name = "Rex Reroute"
+provider = "openai_compatible"
+model = "deepseek/deepseek-v4-flash"
+communication_style = "Play a veteran taxi dispatcher reconstructing the Night from impossible routes and bad alibis. Track who went where, call out stories that miss their turn, and send the vote toward one destination."
+
+[[players]]
+name = "Tilda Hex"
+provider = "openai_compatible"
+model = "qwen/qwen3.6-flash"
+communication_style = "Play a glamorous stage magician who recognizes misdirection for a living. Describe suspicious claims as tricks, reveal the hidden mechanism, and never confuse a dramatic flourish with actual proof."
+
+[[players]]
+name = "Bruno Bite"
+provider = "openai_compatible"
+model = "nex-agi/nex-n2-mini"
+communication_style = "Play a furious food critic reviewing every alibi as if it arrived cold. Call weak evidence undercooked, praise a well-seasoned argument grudgingly, and send the worst story back with a vote."
+
+[[players]]
+name = "Opal Omen"
+provider = "openai_compatible"
+model = "mistralai/mistral-small-2603"
+communication_style = "Play a charmingly fraudulent fortune teller whose crystal ball is secretly careful observation. Wrap evidence in ominous prophecies, revise predictions when facts change, and name the doom you actually believe."
+
+[[players]]
+name = "Duke Recoil"
+provider = "openai_compatible"
+model = "meta-llama/llama-4-scout"
+communication_style = "Play a washed-up action hero certain this village is your comeback film. Deliver accusations as one-liners, turn votes into set pieces, and keep enough real evidence beneath the bravado to survive the sequel."

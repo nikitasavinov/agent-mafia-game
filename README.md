@@ -14,15 +14,20 @@ _A real game, replayed with eight short tempers and the Mafia's plotting exposed
 The terminal is only the first table. A proper visual game room—with faces,
 secret roles, live accusations, and plenty of dramatic pointing—is coming next.
 
-Any OpenAI-compatible Chat Completions host works, and one seat can be you.
-Change a `communication_style` and the same model becomes a fraudulent fortune
-teller, a furious food critic, or a washed-up action hero.
+Agent Mafia is provider-agnostic. OpenRouter is the bundled shortcut, not a
+dependency: every seat can point to a different OpenAI-compatible Chat
+Completions endpoint, including local Ollama, and one seat can be you. Give each
+seat a distinct voice and debating style with `communication_style`; the engine
+still controls roles, visibility, and legal actions.
 
 ## Start a game
 
 You need Python 3.11+ and [uv](https://docs.astral.sh/uv/).
 
-**OpenRouter** — set an [API key](https://openrouter.ai/keys) and play:
+**Hosted example (OpenRouter)** — the bundled roster uses OpenRouter because
+one key can reach several model families. Agent Mafia does not depend on it:
+any OpenAI-compatible provider or local server can be used instead. To run this
+example, set an [OpenRouter key](https://openrouter.ai/keys):
 
 ```bash
 export OPENROUTER_API_KEY="your-key"
@@ -55,6 +60,7 @@ means it is safe to commit and customize, not that it must be copied first.
 | --- | --- |
 | Six moods at one table | `uv run mafia play examples/openrouter_one_of_each.example.toml` |
 | Six cheap, fast OpenRouter models | `uv run mafia play` |
+| Eight distinct characters on budget models | `uv run mafia play examples/openrouter_eight_players.example.toml` |
 | Six model families through one OpenRouter key | `uv run mafia play examples/openrouter.example.toml` |
 | Three Sonnets versus three GPTs who despise each other | `uv run mafia play examples/sonnet_vs_gpt.example.toml` |
 | You versus five OpenRouter characters | `uv run mafia play examples/human.example.toml` |
@@ -99,7 +105,10 @@ communication_style = "Treat every accusation like a scandalous society rumor."
 A game needs 6–12 players. Personalities change how agents talk, not what they
 know or which actions are legal.
 
-Ready to cast your own table? Jump to [Advanced](#advanced).
+OpenRouter appears often in these examples because one key makes mixed-model
+demos easy—not because the engine depends on it. Swap `base_url`, `model`, and
+key settings per seat; see [Providers](#providers). Ready to cast your own
+table? Jump to [Advanced](#advanced).
 
 ## How Mafia works
 
@@ -138,7 +147,9 @@ Replay never calls a model. Search stays public unless you pass
 
 ## Providers
 
-Set `base_url` and a key. Mix hosts in one roster.
+There is no OpenRouter-specific code path. Automated seats speak the
+OpenAI-compatible Chat Completions protocol: set `base_url`, `model`, and a key
+for each seat, then mix hosts in one roster.
 
 ```toml
 [game]

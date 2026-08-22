@@ -15,7 +15,7 @@ FAST_OPENROUTER_MODELS = [
     "qwen/qwen3.6-flash",
     "nex-agi/nex-n2-mini",
 ]
-THEMED_OPENROUTER_MODELS = [
+EIGHT_PLAYER_OPENROUTER_MODELS = [
     *FAST_OPENROUTER_MODELS,
     "mistralai/mistral-small-2603",
     "meta-llama/llama-4-scout",
@@ -47,22 +47,24 @@ THEMED_OPENROUTER_STYLES = {
 }
 
 EXAMPLES = [
-    ("openai.toml", {Provider.OPENAI_COMPATIBLE}, 0),
-    ("openrouter.example.toml", {Provider.OPENAI_COMPATIBLE}, 0),
-    ("openrouter_fast.example.toml", {Provider.OPENAI_COMPATIBLE}, 0),
-    ("ollama.toml", {Provider.OPENAI_COMPATIBLE}, 0),
-    ("mixed_local.example.toml", {Provider.OPENAI_COMPATIBLE}, 0),
-    ("sonnet_vs_gpt.example.toml", {Provider.OPENAI_COMPATIBLE}, 0),
-    ("human.example.toml", {Provider.OPENAI_COMPATIBLE, Provider.HUMAN}, 1),
-    ("openrouter_one_of_each.example.toml", {Provider.OPENAI_COMPATIBLE}, 0),
+    ("openai.toml", {Provider.OPENAI_COMPATIBLE}, 0, 6),
+    ("openrouter.example.toml", {Provider.OPENAI_COMPATIBLE}, 0, 6),
+    ("openrouter_fast.example.toml", {Provider.OPENAI_COMPATIBLE}, 0, 6),
+    ("openrouter_eight_players.example.toml", {Provider.OPENAI_COMPATIBLE}, 0, 8),
+    ("ollama.toml", {Provider.OPENAI_COMPATIBLE}, 0, 6),
+    ("mixed_local.example.toml", {Provider.OPENAI_COMPATIBLE}, 0, 6),
+    ("sonnet_vs_gpt.example.toml", {Provider.OPENAI_COMPATIBLE}, 0, 6),
+    ("human.example.toml", {Provider.OPENAI_COMPATIBLE, Provider.HUMAN}, 1, 6),
+    ("openrouter_one_of_each.example.toml", {Provider.OPENAI_COMPATIBLE}, 0, 6),
 ]
 
 
-@pytest.mark.parametrize(("filename", "providers", "human_count"), EXAMPLES)
+@pytest.mark.parametrize(("filename", "providers", "human_count", "player_count"), EXAMPLES)
 def test_example_roster_is_valid_and_safe(
     filename: str,
     providers: set[Provider],
     human_count: int,
+    player_count: int,
 ) -> None:
     path = Path(__file__).parents[2] / "examples" / filename
 
@@ -72,7 +74,7 @@ def test_example_roster_is_valid_and_safe(
     ]
 
     assert {player.provider for player in config.players} == providers
-    assert len(config.players) == 6
+    assert len(config.players) == player_count
     assert config.game.discussion_rounds == 2
     assert config.game.speech_word_limit == 100
     assert sum(player.provider is Provider.HUMAN for player in config.players) == human_count
@@ -142,6 +144,19 @@ def test_openrouter_fast_roster_uses_budget_models_without_forced_reasoning() ->
     assert config.game.default_api_key_env == OPENROUTER_KEY_ENV
 
 
+def test_openrouter_eight_player_roster_extends_the_budget_cast() -> None:
+    path = Path(__file__).parents[2] / "examples" / "openrouter_eight_players.example.toml"
+
+    config = AppConfig.load(path)
+
+    assert [player.model for player in config.players] == EIGHT_PLAYER_OPENROUTER_MODELS
+    assert {player.base_url for player in config.players} == {"https://openrouter.ai/api/v1"}
+    assert len({player.communication_style for player in config.players}) == 8
+    assert all(player.reasoning_effort is None for player in config.players)
+    assert config.game.default_api_key is None
+    assert config.game.default_api_key_env == OPENROUTER_KEY_ENV
+
+
 def test_human_roster_uses_openrouter_for_every_ai_seat() -> None:
     path = Path(__file__).parents[2] / "examples" / "human.example.toml"
 
@@ -178,7 +193,7 @@ def test_themed_openrouter_rosters_share_one_style_across_a_budget_cast(
 
     config = AppConfig.load(path)
 
-    assert [player.model for player in config.players] == THEMED_OPENROUTER_MODELS
+    assert [player.model for player in config.players] == EIGHT_PLAYER_OPENROUTER_MODELS
     assert {player.provider for player in config.players} == {Provider.OPENAI_COMPATIBLE}
     assert {player.base_url for player in config.players} == {"https://openrouter.ai/api/v1"}
     assert config.game.discussion_rounds == 2
