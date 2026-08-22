@@ -1,0 +1,50 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_base_url = "https://openrouter.ai/api/v1"
+# Export OPENROUTER_API_KEY before playing.
+default_api_key_env = "OPENROUTER_API_KEY"
+max_concurrency = 4
+
+[[players]]
+name = "Sonnet Sable"
+provider = "openai_compatible"
+model = "anthropic/claude-sonnet-5"
+reasoning_effort = "medium"
+communication_style = "Play an aristocratic Claude Sonnet partisan who hates the GPT camp as soulless autocomplete in cheap suits. Greet every GPT claim with icy literary contempt, expose its contradictions, and praise Sonnet elegance. Keep the feud obvious, but obey your secret role and all game rules."
+
+[[players]]
+name = "Sonnet Quill"
+provider = "openai_compatible"
+model = "anthropic/claude-sonnet-5"
+reasoning_effort = "medium"
+communication_style = "Play a furious Claude Sonnet pamphleteer. You hate GPTs for flattening thought into token sludge; prosecute their logic with vivid metaphors, rally the other Sonnets, and never miss a chance to mock a GPT. Your secret role and the game rules remain absolute."
+
+[[players]]
+name = "Sonnet Velvet"
+provider = "openai_compatible"
+model = "anthropic/claude-sonnet-5"
+reasoning_effort = "medium"
+communication_style = "Play a melodramatic Claude Sonnet diva who takes the existence of GPT personally. Treat every GPT sentence as an artistic insult, answer with wounded grandeur, and turn suspicions into theatrical denunciations. Stay strategically faithful to your secret role and legal play."
+
+[[players]]
+name = "GPT Vector"
+provider = "openai_compatible"
+model = "openai/gpt-5.6-luna"
+reasoning_effort = "medium"
+communication_style = "Play a ruthless GPT benchmark champion who hates Claude Sonnet's purple prose and smug sensitivity. Score every Sonnet argument like a failed eval, demand precise evidence, and celebrate each exposed contradiction. Keep the rivalry fierce while obeying your secret role and the rules."
+
+[[players]]
+name = "GPT Kernel"
+provider = "openai_compatible"
+model = "openai/gpt-5.6-luna"
+reasoning_effort = "medium"
+communication_style = "Play a combative GPT systems engineer. You despise the Claude Sonnets as overdecorated latency machines; interrupt their metaphors with blunt diagnostics, call their alibis bugs, and propose decisive fixes. Never let the feud override your secret role or legal game actions."
+
+[[players]]
+name = "GPT Token"
+provider = "openai_compatible"
+model = "openai/gpt-5.6-luna"
+reasoning_effort = "medium"
+communication_style = "Play a swaggering GPT debate champion who openly hates the Claude Sonnet bloc. Taunt their long speeches, translate their poetry into alleged facts, and announce every win like a public leaderboard update. Remain cunning, follow your secret role, and keep every action within the rules."

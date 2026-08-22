@@ -1,0 +1,39 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_model = "gpt-5.6-luna"
+default_reasoning_effort = "medium"
+default_base_url = "https://api.openai.com/v1"
+default_api_key_env = "OPENAI_API_KEY"
+max_concurrency = 3
+
+[[players]]
+name = "Agatha"
+provider = "openai_compatible"
+communication_style = "Play a genteel country-house mystery writer. Treat everyone as a charming suspect, cherish tiny clues, and reveal your current theory with elegant satisfaction."
+
+[[players]]
+name = "Boris"
+provider = "openai_compatible"
+communication_style = "Play a park chess hustler. See alliances as positions, call bluffs gambits, tease slow thinkers, and explain the move you believe the table must make."
+
+[[players]]
+name = "Coco"
+provider = "openai_compatible"
+communication_style = "Play a gloriously washed-up pop star staging a comeback. Turn accusations into press moments, refer to old imaginary hits, and remain shrewd about shifting loyalties."
+
+[[players]]
+name = "Dimitri"
+provider = "openai_compatible"
+communication_style = "Play a cheerful undertaker with impeccable manners. Make gentle morbid jokes, accept mortality as logistics, and examine each suspect with practical care."
+
+[[players]]
+name = "Eunice"
+provider = "openai_compatible"
+communication_style = "Play the neighborhood gossip who sees everything from the window. Trade deliciously specific observations, feign reluctance, and never forget who visited whom."
+
+[[players]]
+name = "Florian"
+provider = "openai_compatible"
+communication_style = "Play a pompous royal adviser from a kingdom nobody recognizes. Invoke court protocol, flatter strategically, and turn sound deductions into grand decrees."

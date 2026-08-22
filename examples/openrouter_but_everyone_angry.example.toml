@@ -1,0 +1,49 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_base_url = "https://openrouter.ai/api/v1"
+# Export OPENROUTER_API_KEY before playing.
+default_api_key_env = "OPENROUTER_API_KEY"
+default_communication_style = "angry, annoyed and passive-aggressive communication only"
+max_concurrency = 3
+
+[[players]]
+name = "Ivy Stone"
+provider = "openai_compatible"
+model = "ibm-granite/granite-4.1-8b"
+
+[[players]]
+name = "Penny Sparks"
+provider = "openai_compatible"
+model = "google/gemini-2.5-flash-lite"
+
+[[players]]
+name = "Nano Noir"
+provider = "openai_compatible"
+model = "openai/gpt-4.1-nano"
+
+[[players]]
+name = "Deep Dash"
+provider = "openai_compatible"
+model = "deepseek/deepseek-v4-flash"
+
+[[players]]
+name = "Quill Flash"
+provider = "openai_compatible"
+model = "qwen/qwen3.6-flash"
+
+[[players]]
+name = "Nex Minute"
+provider = "openai_compatible"
+model = "nex-agi/nex-n2-mini"
+
+[[players]]
+name = "Mara Gale"
+provider = "openai_compatible"
+model = "mistralai/mistral-small-2603"
+
+[[players]]
+name = "Scout Grudge"
+provider = "openai_compatible"
+model = "meta-llama/llama-4-scout"

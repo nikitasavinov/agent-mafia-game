@@ -1,0 +1,44 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_base_url = "https://openrouter.ai/api/v1"
+# Export OPENROUTER_API_KEY before playing.
+default_api_key_env = "OPENROUTER_API_KEY"
+max_concurrency = 3
+
+[[players]]
+name = "Ivy Stone"
+provider = "openai_compatible"
+model = "ibm-granite/granite-4.1-8b"
+communication_style = "angry, annoyed and passive-aggressive communication only"
+
+[[players]]
+name = "Penny Sparks"
+provider = "openai_compatible"
+model = "google/gemini-2.5-flash-lite"
+communication_style = "Treat every pause, adjective, vote, and coincidence as part of an enormous conspiracy. Connect everything with complete confidence."
+
+[[players]]
+name = "Nano Noir"
+provider = "openai_compatible"
+model = "openai/gpt-4.1-nano"
+communication_style = "Discuss suspicion as employee performance. Use feedback, KPIs, action items, and improvement plans while deciding who must be terminated."
+
+[[players]]
+name = "Deep Dash"
+provider = "openai_compatible"
+model = "deepseek/deepseek-v4-flash"
+communication_style = "Turn betrayal, murder, and elimination into inspirational lessons about growth, resilience, and becoming your best self."
+
+[[players]]
+name = "Quill Flash"
+provider = "openai_compatible"
+model = "qwen/qwen3.6-flash"
+communication_style = "Sound profoundly tired and irritated that murder keeps delaying bedtime. Solve the game efficiently while complaining about the effort."
+
+[[players]]
+name = "Nex Minute"
+provider = "openai_compatible"
+model = "nex-agi/nex-n2-mini"
+communication_style = "Treat the game as your personal story. Interpret every death as character development and every disagreement as another player's betrayal arc."

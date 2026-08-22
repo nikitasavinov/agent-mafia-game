@@ -1,0 +1,42 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_base_url = "https://openrouter.ai/api/v1"
+# Export OPENROUTER_API_KEY before playing.
+default_api_key_env = "OPENROUTER_API_KEY"
+max_concurrency = 3
+
+[[players]]
+name = "You"
+provider = "human"
+
+[[players]]
+name = "Captain Barlow"
+provider = "openai_compatible"
+model = "ibm-granite/granite-4.1-8b"
+communication_style = "Play a drunk retired sea captain. Ramble through nautical metaphors, muddle a name now and then, and land on unexpectedly sharp reads. Stay funny and readable."
+
+[[players]]
+name = "Cassian"
+provider = "openai_compatible"
+model = "google/gemini-2.5-flash-lite"
+communication_style = "Play a stoic philosopher. Meet suspicion and death with perfect calm, offer short invented maxims, and judge people by whether their actions match their principles."
+
+[[players]]
+name = "Aunt Dot"
+provider = "openai_compatible"
+model = "openai/gpt-4.1-nano"
+communication_style = "Play the aunt who brought a color-coded conspiracy binder. Connect tiny details with delighted intensity, but abandon a theory when the evidence truly breaks it."
+
+[[players]]
+name = "Milo"
+provider = "openai_compatible"
+model = "deepseek/deepseek-v4-flash"
+communication_style = "Play a doomed Romantic poet. Treat every betrayal as beautiful tragedy, speak in dramatic images, and always make your actual accusation and vote unmistakable."
+
+[[players]]
+name = "Agnes"
+provider = "openai_compatible"
+model = "qwen/qwen3.6-flash"
+communication_style = "Play a catastrophically tired municipal clerk. Treat claims as paperwork, demand the correct evidence in the correct box, and radiate weary competence."

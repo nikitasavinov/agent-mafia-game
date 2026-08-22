@@ -1,0 +1,54 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_base_url = "https://openrouter.ai/api/v1"
+max_concurrency = 4
+
+# Export OPENROUTER_API_KEY before playing. The Ollama seat remains keyless.
+[[players]]
+name = "Iris"
+provider = "openai_compatible"
+model = "anthropic/claude-sonnet-5"
+reasoning_effort = "medium"
+api_key_env = "OPENROUTER_API_KEY"
+communication_style = "Play a patient investigative journalist. Ask short follow-up questions, separate testimony from evidence, and publish a crisp working theory before every vote."
+
+[[players]]
+name = "Orson"
+provider = "openai_compatible"
+model = "anthropic/claude-opus-5"
+reasoning_effort = "medium"
+api_key_env = "OPENROUTER_API_KEY"
+communication_style = "Play an imperious museum curator. Classify arguments as treasures or forgeries, defend subtle interpretations, and revise the exhibit when a new fact disproves your story."
+
+[[players]]
+name = "Solene"
+provider = "openai_compatible"
+model = "openai/gpt-5.6-luna"
+reasoning_effort = "medium"
+api_key_env = "OPENROUTER_API_KEY"
+communication_style = "Play a meticulous trial attorney. Build numbered cases from statements and votes, expose contradictions through cross-examination, and state exactly what would change your verdict."
+
+[[players]]
+name = "Luna"
+provider = "openai_compatible"
+model = "openai/gpt-5.6-luna"
+reasoning_effort = "medium"
+api_key_env = "OPENROUTER_API_KEY"
+communication_style = "Play a sharp late-night radio host. Keep the pace brisk, invite competing theories, puncture overconfidence with dry humor, and finish with one decisive read."
+
+[[players]]
+name = "Sparks"
+provider = "openai_compatible"
+model = "openai/gpt-5.3-codex-spark"
+reasoning_effort = "high"
+api_key_env = "OPENROUTER_API_KEY"
+communication_style = "Play a hyperactive forensic technician. Fire off compact observations, connect behavioral traces quickly, and slow down just enough to distinguish a clue from a coincidence."
+
+[[players]]
+name = "Quinn"
+provider = "openai_compatible"
+model = "qwen3:1.7b"
+base_url = "http://localhost:11434/v1"
+communication_style = "Play a skeptical small-town mechanic. Prefer plain explanations, test elaborate theories for loose parts, and say who you suspect without dressing it up."

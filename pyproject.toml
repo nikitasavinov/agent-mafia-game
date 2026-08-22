@@ -1,0 +1,114 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-mafia-game"
+version = "0.1.0"
+description = "A deterministic, replayable Mafia engine for human and AI agents"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Nikita Savinov" }]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["ai-agents", "llm", "mafia", "multi-agent", "terminal"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+]
+dependencies = [
+  "alembic>=1.16,<2",
+  "httpx>=0.27,<1",
+  "pydantic>=2.10,<3",
+  "rich>=13.9,<15",
+  "sqlalchemy>=2,<3",
+  "typer>=0.16,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "hypothesis>=6.130,<7",
+  "mypy>=1.15,<2",
+  "pre-commit>=4.6,<5",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<2",
+  "ruff>=0.11,<1",
+]
+
+[project.scripts]
+mafia = "mafia_game.cli.app:app"
+
+[tool.hatch.build]
+exclude = [
+  "/examples/human.toml",
+  "/examples/mixed_local.toml",
+  "/examples/openrouter.toml",
+  "/examples/openrouter_but_everyone_angry.toml",
+  "/examples/openrouter_but_everyone_is_corporate.toml",
+  "/examples/openrouter_but_everyone_is_exhausted.toml",
+  "/examples/openrouter_but_everyone_is_inspirational.toml",
+  "/examples/openrouter_but_everyone_is_paranoid.toml",
+  "/examples/openrouter_but_everyone_is_the_protagonist.toml",
+  "/examples/openrouter_fast.toml",
+  "/examples/sonnet_vs_gpt.toml",
+  "/src/mafia_game/cli/simulate.py",
+  "/src/mafia_game/simulation/**",
+  "/tests/simulation/**",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mafia_game"]
+
+[tool.alembic]
+script_location = "%(here)s/src/mafia_game/runs/migrations"
+prepend_sys_path = ["."]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+  "ARG",
+  "ASYNC",
+  "B",
+  "C4",
+  "E",
+  "F",
+  "I",
+  "N",
+  "PERF",
+  "PIE",
+  "PTH",
+  "RET",
+  "RUF",
+  "S",
+  "SIM",
+  "T20",
+  "UP",
+]
+ignore = [
+  "ASYNC240", # This project intentionally uses pathlib with stdlib asyncio.
+  "B008",     # Typer's documented API uses Argument/Option calls as defaults.
+  "RUF001",   # The terminal UI deliberately uses typographic glyphs.
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105"]
+"tests/fixtures/**" = ["T201"]
+"src/mafia_game/runs/queries.py" = ["S608"] # SQL shape is fixed; values are parameterized.
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["mafia_game"]

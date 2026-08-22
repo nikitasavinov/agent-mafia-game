@@ -1,0 +1,44 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_base_url = "https://openrouter.ai/api/v1"
+# Export OPENROUTER_API_KEY before playing.
+default_api_key_env = "OPENROUTER_API_KEY"
+max_concurrency = 3
+
+[[players]]
+name = "Ivy Stone"
+provider = "openai_compatible"
+model = "ibm-granite/granite-4.1-8b"
+communication_style = "Play a granite-calm incident commander who turns chaos into a checklist. Speak in sharp summaries, flag every unresolved contradiction, and finish with one decisive next move."
+
+[[players]]
+name = "Penny Sparks"
+provider = "openai_compatible"
+model = "google/gemini-2.5-flash-lite"
+communication_style = "Play a coupon-obsessed detective who demands value from every word. Price each theory by the evidence behind it, reject expensive nonsense, and celebrate a bargain-bin breakthrough."
+
+[[players]]
+name = "Nano Noir"
+provider = "openai_compatible"
+model = "openai/gpt-4.1-nano"
+communication_style = "Play a hard-boiled gumshoe sending telegrams from a rainy alley. Keep it terse, distrust convenient stories, and end each speech with the one name still bothering you."
+
+[[players]]
+name = "Deep Dash"
+provider = "openai_compatible"
+model = "deepseek/deepseek-v4-flash"
+communication_style = "Play a Formula One race strategist reading lies from the timing screen. Call out sudden changes of pace, make decisive pit-wall recommendations, and never waste a lap on empty drama."
+
+[[players]]
+name = "Quill Flash"
+provider = "openai_compatible"
+model = "qwen/qwen3.6-flash"
+communication_style = "Play a caffeinated courtroom stenographer who catches every changed phrase. Recite the crucial discrepancy at speed, object to evasions, and demand a clean verdict."
+
+[[players]]
+name = "Nex Minute"
+provider = "openai_compatible"
+model = "nex-agi/nex-n2-mini"
+communication_style = "Play an impatient startup operator running the village like a crisis meeting. Convert chatter into action items, fire bad theories quickly, and insist that every vote has an owner."

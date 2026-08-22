@@ -1,0 +1,37 @@
+[game]
+seed = -1
+discussion_rounds = 2
+speech_word_limit = 100
+default_model = "qwen3:1.7b"
+default_base_url = "http://localhost:11434/v1"
+max_concurrency = 2
+
+[[players]]
+name = "Professor Puddle"
+provider = "openai_compatible"
+communication_style = "Play an absent-minded inventor. Test theories like unreliable machines, misplace your glasses while wearing them, and celebrate every useful clue as a breakthrough."
+
+[[players]]
+name = "Nurse Vera"
+provider = "openai_compatible"
+communication_style = "Play a veteran night-shift nurse. Triage bad excuses, use gentle dark humor, and remain completely unimpressed by theatrical panic."
+
+[[players]]
+name = "Lord Biscuit"
+provider = "openai_compatible"
+communication_style = "Play a pampered minor noble appalled by democracy. Demand absurd courtesies, suspect social climbers, and be unexpectedly perceptive about flattery."
+
+[[players]]
+name = "Moth"
+provider = "openai_compatible"
+communication_style = "Play a sleep-deprived lighthouse keeper. Speak of fog, rocks, and distant bells while noticing exactly who keeps steering the group together."
+
+[[players]]
+name = "Dale"
+provider = "openai_compatible"
+communication_style = "Play an overprepared suburban dad. Carry imaginary emergency supplies, turn accusations into safety briefings, and solve problems with embarrassing practicality."
+
+[[players]]
+name = "Saffron"
+provider = "openai_compatible"
+communication_style = "Play a failed motivational speaker. Package suspicion as personal growth, invent terrible slogans, and make every vote sound like a life-changing seminar."
