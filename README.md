@@ -11,14 +11,16 @@ Or play together with them!
 
 _A real game, replayed with eight short tempers and the Mafia's plotting exposed._
 
-The terminal is only the first table. A proper visual game room—with faces,
-secret roles, live accusations, and plenty of dramatic pointing—is coming next.
+Agent Mafia supports any provider with an OpenAI-compatible Chat Completions
+API. OpenRouter is only the bundled example, not a dependency: every seat can
+point to a different endpoint, including local Ollama, and one seat can be you.
+Give each seat a distinct voice and debating style with `communication_style`;
+the engine still controls roles, visibility, and legal actions.
 
-Agent Mafia is provider-agnostic. OpenRouter is the bundled shortcut, not a
-dependency: every seat can point to a different OpenAI-compatible Chat
-Completions endpoint, including local Ollama, and one seat can be you. Give each
-seat a distinct voice and debating style with `communication_style`; the engine
-still controls roles, visibility, and legal actions.
+## Upcoming
+
+- A visual game UI for watching the cast, accusations, votes, and Night drama unfold.
+- Benchmarking for comparing models across many games, roles, and providers.
 
 ## Start a game
 
@@ -34,7 +36,14 @@ export OPENROUTER_API_KEY="your-key"
 
 uv run mafia play
 
-# or uv run mafia play examples/openrouter_one_of_each.example.toml if you want to have more fun
+# Or, for more fun, try these creative options
+uv run mafia play --communication-style "Play a catastrophically petty homeowners association: treat each murder as a noise complaint, cite imaginary bylaws, and vote to evict the suspect."
+uv run mafia play --communication-style "Play medieval villagers who think probability is witchcraft and every spreadsheet is a dark omen."
+uv run mafia play --communication-style "Play incompetent supervillains hunting a traitor while pretending everyone understands the master plan."
+# Play with 8 players
+uv run mafia play examples/openrouter_eight_players.example.toml --communication-style "Play rival cruise-ship entertainers solving a murder before the midnight buffet."
+# Play too
+uv run mafia play examples/human.example.toml
 ```
 
 **Ollama** — start the daemon, then:
@@ -44,12 +53,13 @@ ollama pull qwen3:1.7b # the bigger the model the better the game.
 uv run mafia play examples/ollama.toml
 ```
 
-**You can play too** — run
-`uv run mafia play examples/human.example.toml`. You get a secret role and make
-speeches, votes, and Night choices from the terminal; the AI seats use the same
-`OPENROUTER_API_KEY`.
+The human roster gives you a secret role and lets you make speeches, votes, and
+Night choices from the terminal.
 
 `--step` pauses at every phase. `--seed -1` shuffles a new game.
+`--communication-style "..."` replaces every AI seat's configured style for
+that game without changing the roster file. CLI style beats per-player style;
+per-player style beats the game default.
 
 ## Choose your chaos
 
@@ -170,7 +180,7 @@ are in their [catalog](https://openrouter.ai/models).
 | Command | What it does |
 | --- | --- |
 | `mafia doctor [CONFIG]` | Checks a roster. `--live` sends one real request per model. |
-| `mafia play [CONFIG]` | Plays one game. `--step` pauses at every phase. |
+| `mafia play [CONFIG]` | Plays one game. Override the table with `--communication-style`. |
 | `mafia replay RUN_ID` | Replays without calling a model. `--view public` hides secrets. |
 | `mafia runs list` | Filters games by result, model, player, or date. |
 | `mafia runs search QUERY` | Searches recorded dialogue and events. |

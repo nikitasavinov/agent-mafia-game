@@ -111,6 +111,46 @@ def test_default_communication_style_fills_missing_players_and_allows_override(
     assert config.players[5].communication_style == "Speak like yourself."
 
 
+def test_communication_style_override_revalidates_and_skips_human() -> None:
+    config = AppConfig(
+        game={"default_communication_style": "Original table style."},
+        players=[
+            PlayerConfig(name="You", provider=Provider.HUMAN),
+            *[
+                PlayerConfig(
+                    name=f"P{seat}",
+                    provider=Provider.FAKE,
+                    model="m",
+                    communication_style=f"Original style {seat}.",
+                )
+                for seat in range(2, 7)
+            ],
+        ],
+    )
+
+    overridden = config.with_communication_style("  Debate like furious chess masters.  ")
+
+    assert overridden.game.default_communication_style == "Debate like furious chess masters."
+    assert overridden.players[0].communication_style is None
+    assert {player.communication_style for player in overridden.players[1:]} == {
+        "Debate like furious chess masters."
+    }
+    assert config.game.default_communication_style == "Original table style."
+    assert config.players[1].communication_style == "Original style 2."
+
+
+@pytest.mark.parametrize("style", ["   ", "x" * 501])
+def test_communication_style_override_rejects_invalid_text(style: str) -> None:
+    config = AppConfig(
+        players=[
+            PlayerConfig(name=f"P{seat}", provider=Provider.FAKE, model="m") for seat in range(1, 7)
+        ]
+    )
+
+    with pytest.raises(ValidationError):
+        config.with_communication_style(style)
+
+
 def test_rejects_blank_default_communication_style() -> None:
     with pytest.raises(ValidationError, match="must not be blank"):
         AppConfig(

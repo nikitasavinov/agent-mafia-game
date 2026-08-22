@@ -258,6 +258,18 @@ class AppConfig(BaseModel):
             raise ValueError("a terminal game supports at most one human player")
         return self
 
+    def with_communication_style(self, style: str) -> Self:
+        """Return a validated copy with one style applied to every automated seat."""
+        game = self.game.model_dump(mode="python")
+        game["default_communication_style"] = style
+        players: list[dict[str, Any]] = []
+        for player in self.players:
+            resolved = player.model_dump(mode="python")
+            if player.provider is not Provider.HUMAN:
+                resolved["communication_style"] = style
+            players.append(resolved)
+        return type(self).model_validate({"game": game, "players": players})
+
     @classmethod
     def load(cls, path: Path) -> Self:
         with path.open("rb") as handle:

@@ -9,6 +9,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import typer
+from pydantic import ValidationError
 
 from mafia_game.agents import HumanDriver, default_drivers, run_preflight
 from mafia_game.config import Provider
@@ -42,6 +43,11 @@ def play(
         min=-1,
         help="Override the configured seed; use -1 for a fresh random seed.",
     ),
+    communication_style: str | None = typer.Option(
+        None,
+        "--communication-style",
+        help="Override every automated seat's communication style for this game.",
+    ),
     step: bool = typer.Option(False, "--step", help="Pause at every phase boundary."),
     database: Path = typer.Option(
         DEFAULT_DATABASE,
@@ -54,6 +60,12 @@ def play(
     """Play one complete game."""
     config_path = resolve_config_path(config)
     settings = load_config(config_path)
+    if communication_style is not None:
+        try:
+            settings = settings.with_communication_style(communication_style)
+        except ValidationError as error:
+            console.print(f"[red]Invalid communication style: {error}[/red]")
+            raise typer.Exit(2) from error
     perspective_seat = human_seat(settings)
     drivers = None
     if perspective_seat is not None:

@@ -45,14 +45,27 @@ def write_fake_config(path: Path) -> None:
 def test_cli_play_and_replay(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     config = tmp_path / "game.toml"
     database = tmp_path / "mafia.db"
+    style = "Argue like a deeply offended chess commentator."
     write_fake_config(config)
     runner = CliRunner()
 
-    play = runner.invoke(app, ["play", str(config), "--database", str(database)])
+    play = runner.invoke(
+        app,
+        [
+            "play",
+            str(config),
+            "--database",
+            str(database),
+            "--communication-style",
+            style,
+        ],
+    )
     assert play.exit_code == 0, play.output
     with RunDatabase(database) as run_database:
         records = run_database.list_runs()
+        stored_config = run_database.load_metadata(records[0].game_id).config
     assert len(records) == 1
+    assert {player.communication_style for player in stored_config.players} == {style}
 
     delays: list[float] = []
     monkeypatch.setattr("mafia_game.runs.replay.sleep", delays.append)
@@ -155,3 +168,17 @@ def test_failed_play_preflight_points_to_doctor(tmp_path: Path) -> None:
     assert "For detailed diagnostics" in output
     assert "mafia doctor" in output
     assert "missing-key.toml --live" in output
+
+
+def test_play_rejects_blank_communication_style(tmp_path: Path) -> None:
+    config = tmp_path / "game.toml"
+    write_fake_config(config)
+
+    result = CliRunner().invoke(
+        app,
+        ["play", str(config), "--communication-style", "   "],
+    )
+
+    assert result.exit_code == 2
+    assert "Invalid communication style" in result.output
+    assert "must not be blank" in result.output
