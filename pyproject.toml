@@ -34,7 +34,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "hypothesis>=6.130,<7",
-  "mypy>=1.15,<2",
+  "mypy>=1.15,<3",
   "pre-commit>=4.6,<5",
   "pytest>=8.3,<9",
   "pytest-asyncio>=0.25,<2",
