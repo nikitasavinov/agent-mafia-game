@@ -26,7 +26,7 @@ dependencies = [
   "alembic>=1.16,<2",
   "httpx>=0.27,<1",
   "pydantic>=2.10,<3",
-  "rich>=13.9,<15",
+  "rich>=13.9,<16",
   "sqlalchemy>=2,<3",
   "typer>=0.16,<1",
 ]
