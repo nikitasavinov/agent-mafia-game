@@ -36,7 +36,7 @@ dev = [
   "hypothesis>=6.130,<7",
   "mypy>=1.15,<2",
   "pre-commit>=4.6,<5",
-  "pytest>=8.3,<9",
+  "pytest>=8.3,<10",
   "pytest-asyncio>=0.25,<2",
   "ruff>=0.11,<1",
 ]
